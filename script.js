@@ -35,8 +35,22 @@ function GenereerSudoku(){
     let index = 0;
     //we lopen alle id's bij langs: 1 t/m 81;
     //denk erom: de index moet bij 0 beginnen
-    for(i = 1; i <= 81; i++){
-        document.getElementById(i).innerText = selected_sudoku[index];
-        index++;
-    }
+    // for(i = 1; i <= 81; i++){
+    //     document.getElementById(i).innerText = selected_sudoku[index];
+    //     index++;
+    // }
+    //kan ook met een while-loop
+    // let i = 1;
+    // while(i <= 81){
+    //     document.getElementById(i).innerText = selected_sudoku[index];
+    //     index++;
+    //     i++
+    // }
+    //kan ook met for each die speciaal voor het doorlopen van arrays gebouwd is
+    selected_sudoku.forEach(plaatsInGrid);
+}
+
+function plaatsInGrid(item, index)
+{
+    document.getElementById(index + 1).innerText = item;
 }
