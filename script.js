@@ -12,7 +12,7 @@ let activeCellId = 1;
 
 let sudoku_string = "<ul>";
 for(i=1; i<=81; i++){
-    sudoku_string += `<li id="${i}" onclick="activateCell(${i})"></li>`;
+    sudoku_string += `<li class="dummy" id="${i}" onclick="activateCell(${i})"></li>`;
 }
 sudoku_string += "</ul>";
 document.getElementById("sudoku").innerHTML = sudoku_string;
@@ -22,9 +22,13 @@ function selectCijfer(cijfer){
 }
 
 function activateCell(id){
-    document.getElementById(activeCellId).classList.remove("bg-primary-subtle");
-    activeCellId = id;
-    document.getElementById(activeCellId).classList.add("bg-primary-subtle");
+    //bij een cijfer mag de cel niet meer aangepast worden
+    //als de achtergrond grijs is, niet activeren
+    if(!document.getElementById(id).classList.contains("bg-secondary-subtle")){
+        document.getElementById(activeCellId).classList.remove("bg-primary-subtle");
+        activeCellId = id;
+        document.getElementById(activeCellId).classList.add("bg-primary-subtle");
+    }
 }
 
 function GenereerSudoku(){
@@ -51,6 +55,16 @@ function GenereerSudoku(){
 }
 
 function plaatsInGrid(item, index)
-{
-    document.getElementById(index + 1).innerText = item;
+{ 
+    //als het een nul is, moet hij leeg blijven/worden - check
+    //de achtergrond bij een cijfer moet grijs worden - check check
+    //==0 ? "": item
+    if(item == 0){
+        document.getElementById(index + 1).classList.remove("bg-secondary-subtle");
+        document.getElementById(index + 1).innerText = "";
+    }
+    else {
+        document.getElementById(index + 1).innerText = item;
+        document.getElementById(index + 1).classList.add("bg-secondary-subtle");
+    }
 }
